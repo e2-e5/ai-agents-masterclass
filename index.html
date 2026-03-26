@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-агенты для бизнеса: разберёмся с нуля | AI First</title>
+    <meta name="description" content="Онлайн-встреча для предпринимателей про AI-агентов. 27 марта, 11:00 МСК. Объясним простым языком — без кода и техно-жаргона.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-primary: #FAFAF8;
+            --bg-secondary: #F5F5F3;
+            --text-primary: #1A1A2E;
+            --text-secondary: #6B6B7D;
+            --accent-primary: #4F46E5;
+            --accent-secondary: #F59E0B;
+            --card-bg: #FFFFFF;
+            --border: #E5E7EB;
+            --gradient-start: #F8FAFC;
+            --gradient-end: #EEF2FF;
+            --shadow-light: 0 2px 4px rgba(0, 0, 0, 0.02);
+            --shadow-medium: 0 8px 16px rgba(0, 0, 0, 0.06);
+            --shadow-strong: 0 16px 32px rgba(0, 0, 0, 0.1);
+            --transition: all 0.2s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-weight: 400;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .fade-in {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+            
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            padding: 80px 0 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 45%, rgba(79, 70, 229, 0.02) 50%, transparent 55%);
+            animation: gradient-shift 8s ease-in-out infinite;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { transform: translateX(-100%); }
+            50% { transform: translateX(100%); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            background: rgba(79, 70, 229, 0.1);
+            color: var(--accent-primary);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 24px;
+            border: 1px solid rgba(79, 70, 229, 0.2);
+        }
+
+        .hero h1 {
+            font-size: clamp(32px, 5vw, 56px);
+            font-weight: 700;
+            margin-bottom: 24px;
+            line-height: 1.1;
+            color: var(--text-primary);
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: var(--text-secondary);
+            max-width: 680px;
+            margin: 0 auto 40px;
+            line-height: 1.5;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 32px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: var(--accent-primary);
+            color: white;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .btn-primary:hover {
+            background: #3B32D8;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-strong);
+        }
+
+        .btn-secondary {
+            background: var(--card-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-light);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-secondary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .meta-pills {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .meta-pill {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .pill-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent-secondary);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 48px;
+            line-height: 1.2;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 32px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+            height: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent-primary), #6366F1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: white;
+            font-size: 20px;
+        }
+
+        .card h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* What We'll Cover Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 28px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .feature-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: var(--accent-primary);
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .feature-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+
+        /* Target Audience */
+        .audience-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .audience-blocks {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            margin-top: 40px;
+        }
+
+        .audience-block {
+            background: var(--card-bg);
+            padding: 32px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-light);
+        }
+
+        .audience-block h3 {
+            color: var(--accent-primary);
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .audience-block ul {
+            list-style: none;
+            color: var(--text-secondary);
+        }
+
+        .audience-block li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+        }
+
+        .audience-block li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent-secondary);
+            font-weight: bold;
+        }
+
+        .quote {
+            background: var(--bg-secondary);
+            padding: 24px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-primary);
+            margin-top: 24px;
+            font-style: italic;
+            color: var(--text-primary);
+        }
+
+        /* Final CTA */
+        .final-cta {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 48px;
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .event-date {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--accent-primary);
+            margin-bottom: 24px;
+        }
+
+        .cta-buttons-final {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 32px;
+        }
+
+        .qr-section {
+            margin-top: 32px;
+            padding-top: 32px;
+            border-top: 1px solid var(--border);
+        }
+
+        .qr-code {
+            margin: 0 auto 16px;
+            width: 120px;
+            height: 120px;
+        }
+
+        .qr-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-secondary);
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 60px 0 80px;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 280px;
+            }
+            
+            .final-cta {
+                padding: 32px 24px;
+            }
+            
+            .meta-pills {
+                flex-direction: column;
+                gap: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 16px;
+            }
+            
+            .card {
+                padding: 24px;
+            }
+            
+            .audience-blocks {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content fade-in">
+                <div class="eyebrow">AI First · Пятница, 27 марта · 11:00 МСК</div>
+                <h1>AI-агенты для бизнеса: разберёмся с нуля</h1>
+                <p>Онлайн-встреча для предпринимателей, которые слышали про агентов, но не понимают, зачем они нужны и как это работает. Объясним простым языком — без кода и техно-жаргона.</p>
+                
+                <div class="cta-buttons">
+                    <button class="btn btn-primary" onclick="addToCalendar()">📅 Добавить в календарь</button>
+                    <a href="#" class="btn btn-secondary">🎥 Зайти на эфир</a>
+                </div>
+                
+                <div class="meta-pills">
+                    <div class="meta-pill">
+                        <div class="pill-dot"></div>
+                        Бесплатно
+                    </div>
+                    <div class="meta-pill">
+                        <div class="pill-dot"></div>
+                        60 минут
+                    </div>
+                    <div class="meta-pill">
+                        <div class="pill-dot"></div>
+                        Для новичков
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title fade-in">Все говорят про агентов. Но что это реально значит для бизнеса?</h2>
+            
+            <div class="cards-grid">
+                <div class="card fade-in">
+                    <div class="card-icon">📈</div>
+                    <h3>Хайп зашкаливает</h3>
+                    <p>Каждый день новый AI-инструмент. Непонятно, что реально работает, а что просто красивая демка.</p>
+                </div>
+                
+                <div class="card fade-in">
+                    <div class="card-icon">🤔</div>
+                    <h3>Непонятно, с чего начать</h3>
+                    <p>Агенты, ассистенты, автоматизация — терминов много, а ясности ноль. Хочется простого объяснения.</p>
+                </div>
+                
+                <div class="card fade-in">
+                    <div class="card-icon">⏰</div>
+                    <h3>Страшно отстать</h3>
+                    <p>Конкуренты уже внедряют. А вы даже не уверены, нужно ли это вашему бизнесу.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What We'll Cover -->
+    <section class="section" style="background: var(--bg-secondary);">
+        <div class="container">
+            <h2 class="section-title fade-in">Что будет на встрече</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-number">1</div>
+                    <h3>Что такое AI-агенты простым языком</h3>
+                    <p>Без технических деталей. Объясним так, чтобы было понятно после первого раза.</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-number">2</div>
+                    <h3>Где агенты уже приносят пользу бизнесу</h3>
+                    <p>Реальные сценарии: продажи, операционка, маркетинг, клиентский сервис.</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-number">3</div>
+                    <h3>Живая демонстрация</h3>
+                    <p>Покажем, как агент работает на практике. Не слайды — а рабочий пример.</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-number">4</div>
+                    <h3>Как начать, если вы полный новичок</h3>
+                    <p>Конкретный план первых шагов. Без "сначала выучите Python".</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Target Audience -->
+    <section class="section">
+        <div class="container">
+            <div class="audience-content">
+                <h2 class="section-title fade-in">Если вы предприниматель и ни разу не настраивали агента — вам точно сюда</h2>
+                
+                <div class="audience-blocks">
+                    <div class="audience-block fade-in">
+                        <h3>Подойдёт, если:</h3>
+                        <ul>
+                            <li>У вас бизнес или управленческая роль</li>
+                            <li>Слышали про агентов, но не пробовали</li>
+                            <li>Хотите понять, стоит ли вообще в это вкладываться</li>
+                            <li>Устали от хайпа и хотите ясности</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="audience-block fade-in">
+                        <h3>Главная мысль:</h3>
+                        <div class="quote">
+                            "Агенты — это не замена людей. Это способ убрать рутину и дать команде заниматься тем, что реально важно."
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="section">
+        <div class="container">
+            <div class="final-cta fade-in">
+                <div class="event-date">Пятница · 27 марта · 11:00 МСК</div>
+                
+                <div class="cta-buttons-final">
+                    <button class="btn btn-primary" onclick="addToGoogleCalendar()">📅 Google Calendar</button>
+                    <button class="btn btn-secondary" onclick="downloadICS()">📎 Скачать .ics</button>
+                    <a href="#" class="btn btn-primary">🎥 Зайти на эфир</a>
+                </div>
+                
+                <div class="qr-section">
+                    <div class="qr-code" id="qr-code"></div>
+                    <div class="qr-label">QR-код страницы</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>AI First · Сообщество предпринимателей, которые строят будущее</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple QR Code generator (inline implementation)
+        function generateQRCode(text, size = 120) {
+            // Simplified QR code generation - using a basic pattern
+            // In production, you'd use a proper QR library like qrcode.js
+            const qrDiv = document.getElementById('qr-code');
+            const cellSize = size / 21; // 21x21 grid for simple QR
+            
+            // Create SVG
+            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            svg.setAttribute('width', size);
+            svg.setAttribute('height', size);
+            svg.setAttribute('viewBox', `0 0 ${size} ${size}`);
+            svg.style.border = '1px solid #E5E7EB';
+            svg.style.borderRadius = '8px';
+            
+            // Simple pattern for demo (would need proper QR algorithm for real use)
+            const pattern = [
+                [1,1,1,1,1,1,1,0,1,0,1,0,1,1,1,1,1,1,1],
+                [1,0,0,0,0,0,1,0,0,1,0,1,0,1,0,0,0,0,1],
+                [1,0,1,1,1,0,1,0,1,1,1,1,1,1,0,1,1,1,1],
+                [1,0,1,1,1,0,1,0,0,0,1,0,0,1,0,1,1,1,1],
+                [1,0,1,1,1,0,1,0,1,0,1,0,1,1,0,1,1,1,1],
+                [1,0,0,0,0,0,1,0,0,1,0,1,0,1,0,0,0,0,1],
+                [1,1,1,1,1,1,1,0,1,0,1,0,1,1,1,1,1,1,1],
+                [0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0],
+                [1,0,1,1,0,1,1,1,1,0,1,0,1,1,1,0,1,1,1],
+                [0,1,0,0,1,0,0,0,0,1,0,1,0,0,0,1,0,0,0],
+                [1,1,1,0,0,1,1,1,1,0,1,0,1,1,1,0,1,1,1],
+                [0,0,0,1,1,0,0,0,0,1,0,1,0,0,0,1,0,0,0],
+                [1,1,1,0,1,1,1,1,1,0,1,0,1,1,1,0,1,1,1],
+                [0,0,0,0,0,0,0,0,1,1,0,1,1,0,0,1,0,0,0],
+                [1,1,1,1,1,1,1,0,0,0,1,0,0,1,0,1,1,1,1],
+                [1,0,0,0,0,0,1,0,1,1,0,1,1,1,0,0,0,0,1],
+                [1,0,1,1,1,0,1,0,0,0,1,0,0,1,0,1,1,1,1],
+                [1,0,1,1,1,0,1,0,1,1,0,1,1,1,0,1,1,1,1],
+                [1,1,1,1,1,1,1,0,0,0,1,0,0,1,1,1,1,1,1]
+            ];
+            
+            // Draw pattern
+            for (let y = 0; y < pattern.length; y++) {
+                for (let x = 0; x < pattern[y].length; x++) {
+                    if (pattern[y][x] === 1) {
+                        const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                        rect.setAttribute('x', x * cellSize);
+                        rect.setAttribute('y', y * cellSize);
+                        rect.setAttribute('width', cellSize);
+                        rect.setAttribute('height', cellSize);
+                        rect.setAttribute('fill', '#1A1A2E');
+                        svg.appendChild(rect);
+                    }
+                }
+            }
+            
+            qrDiv.innerHTML = '';
+            qrDiv.appendChild(svg);
+        }
+
+        // Calendar functions
+        function addToCalendar() {
+            const dropdown = document.createElement('div');
+            dropdown.style.position = 'absolute';
+            dropdown.style.background = 'white';
+            dropdown.style.border = '1px solid #E5E7EB';
+            dropdown.style.borderRadius = '8px';
+            dropdown.style.padding = '8px';
+            dropdown.style.boxShadow = '0 8px 16px rgba(0,0,0,0.1)';
+            dropdown.style.zIndex = '1000';
+            
+            dropdown.innerHTML = `
+                <button onclick="addToGoogleCalendar()" style="display: block; width: 100%; padding: 8px 16px; border: none; background: none; text-align: left; cursor: pointer; border-radius: 4px;" onmouseover="this.style.background='#F3F4F6'" onmouseout="this.style.background='none'">📅 Google Calendar</button>
+                <button onclick="downloadICS()" style="display: block; width: 100%; padding: 8px 16px; border: none; background: none; text-align: left; cursor: pointer; border-radius: 4px; margin-top: 4px;" onmouseover="this.style.background='#F3F4F6'" onmouseout="this.style.background='none'">📎 Скачать .ics</button>
+            `;
+            
+            document.body.appendChild(dropdown);
+            
+            // Position dropdown
+            const rect = event.target.getBoundingClientRect();
+            dropdown.style.left = rect.left + 'px';
+            dropdown.style.top = (rect.bottom + 8) + 'px';
+            
+            // Remove on click outside
+            setTimeout(() => {
+                document.addEventListener('click', function removeDropdown(e) {
+                    if (!dropdown.contains(e.target)) {
+                        dropdown.remove();
+                        document.removeEventListener('click', removeDropdown);
+                    }
+                });
+            }, 100);
+        }
+
+        function addToGoogleCalendar() {
+            const title = encodeURIComponent('AI-агенты для бизнеса — AI First');
+            const details = encodeURIComponent('Онлайн-встреча для предпринимателей про AI-агентов. Объясним простым языком — без кода и техно-жаргона. Ссылка на эфир: #');
+            const startTime = '20260327T080000Z'; // 11:00 MSK = 08:00 UTC
+            const endTime = '20260327T090000Z';   // 12:00 MSK = 09:00 UTC
+            
+            const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startTime}/${endTime}&details=${details}&sf=true&output=xml`;
+            
+            window.open(url, '_blank');
+        }
+
+        function downloadICS() {
+            const icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//AI First//AI Agents Masterclass//EN
+BEGIN:VEVENT
+UID:ai-agents-masterclass-20260327@ai-first.ru
+DTSTAMP:20260326T133800Z
+DTSTART:20260327T080000Z
+DTEND:20260327T090000Z
+SUMMARY:AI-агенты для бизнеса — AI First
+DESCRIPTION:Онлайн-встреча для предпринимателей про AI-агентов. Объясним простым языком — без кода и техно-жаргона. Ссылка на эфир: #
+LOCATION:Онлайн
+END:VEVENT
+END:VCALENDAR`;
+
+            const blob = new Blob([icsContent], { type: 'text/calendar' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'ai-agents-masterclass.ics';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.addEventListener('DOMContentLoaded', () => {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach(el => observer.observe(el));
+            
+            // Generate QR code
+            generateQRCode('https://e2-e5.github.io/ai-agents-masterclass/');
+        });
+    </script>
+</body>
+</html>
