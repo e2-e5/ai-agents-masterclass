@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI-агенты для бизнеса: разберёмся с нуля | AI First</title>
-    <meta name="description" content="Онлайн-встреча для предпринимателей про AI-агентов. 27 марта, 11:00 МСК. Объясним простым языком — без кода и техно-жаргона.">
+    <title>Привет, я — AI-агент | Мастер-класс от AI First</title>
+    <meta name="description" content="Привет! Я — тот самый AI-агент, про которого все говорят. Завтра Алексей покажет, как я работаю. Вживую. Для тех, кто ещё ни разу не видел агента в деле.">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -130,6 +130,72 @@
             to { transform: scaleX(1); }
         }
 
+        /* Image styles */
+        .feature-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            transition: var(--transition);
+            object-fit: cover;
+            position: relative;
+        }
+
+        .feature-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 25px 50px rgba(139, 92, 246, 0.3);
+        }
+
+        .hero-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 0 auto 32px;
+            display: block;
+            box-shadow: 0 0 80px rgba(139, 92, 246, 0.5);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .section-image {
+            width: 300px;
+            height: 300px;
+            border-radius: 20px;
+            margin: 0 auto;
+            display: block;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .bento-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.1;
+            object-fit: cover;
+            border-radius: 20px;
+            z-index: 1;
+        }
+
+        .bento-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .audience-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin-bottom: 24px;
+            opacity: 0.7;
+        }
+
         /* Animations */
         .clip-reveal {
             opacity: 0;
@@ -168,6 +234,12 @@
         .slide-up {
             opacity: 0;
             transform: translateY(30px);
+            transition: var(--transition);
+        }
+
+        .float-in {
+            opacity: 0;
+            transform: translateY(40px) scale(0.98);
             transition: var(--transition);
         }
 
@@ -311,6 +383,13 @@
             margin-bottom: 64px;
             line-height: 1.2;
             letter-spacing: -0.01em;
+        }
+
+        .section-with-image {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 64px;
+            align-items: center;
         }
 
         /* Problem Cards */
@@ -595,10 +674,25 @@
             background: var(--gradient-warm);
         }
 
+        .cta-hero-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 24px;
+            box-shadow: 0 0 40px rgba(139, 92, 246, 0.4);
+        }
+
+        .cta-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
         .event-date {
             font-size: 20px;
             font-weight: 600;
-            color: var(--text-primary);
+            color: var(--text-secondary);
             margin-bottom: 32px;
             font-family: 'JetBrains Mono', monospace;
         }
@@ -687,6 +781,13 @@
             font-family: 'JetBrains Mono', monospace;
         }
 
+        .cta-note {
+            font-size: 16px;
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-top: 24px;
+        }
+
         /* Footer */
         .footer {
             background: var(--bg-secondary);
@@ -703,6 +804,11 @@
 
         /* Responsive */
         @media (max-width: 1024px) {
+            .section-with-image {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
             .bento-grid {
                 grid-template-columns: repeat(2, 1fr);
                 grid-template-rows: repeat(4, 120px);
@@ -766,6 +872,16 @@
                 flex-direction: column;
                 gap: 16px;
             }
+
+            .hero-image {
+                width: 150px;
+                height: 150px;
+            }
+
+            .section-image {
+                width: 250px;
+                height: 250px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -789,6 +905,8 @@
         <div class="hero-bg-grid"></div>
         <div class="container">
             <div class="hero-content">
+                <img src="images/agent-hello.jpg" alt="Дружелюбный AI-агент" class="hero-image clip-reveal">
+                
                 <div class="eyebrow clip-reveal">
                     <span class="font-mono">AI First</span>
                     <span>·</span>
@@ -798,11 +916,10 @@
                 </div>
                 
                 <h1 class="clip-reveal">
-                    <span class="hero-title-main">AI-агенты для бизнеса</span>
-                    <span class="hero-title-sub gradient-text gradient-underline">разберёмся с нуля</span>
+                    <span class="hero-title-main">Привет, я — AI-агент</span>
                 </h1>
                 
-                <p class="slide-up">Онлайн-встреча для предпринимателей, которые слышали про агентов, но не понимают, зачем они нужны и как это работает. Объясним простым языком — без кода и техно-жаргона.</p>
+                <p class="slide-up">Да, тот самый, про которого все говорят. Я помогаю бизнесу Алексея каждый день — и завтра он покажет, как это работает. Вживую. Для тех, кто ещё ни разу не видел агента в деле.</p>
                 
                 <div class="meta-pills slide-up">
                     <div class="meta-pill">
@@ -825,29 +942,34 @@
     <!-- Problem Section -->
     <section class="section">
         <div class="container">
-            <h2 class="section-title slide-up">Все говорят про агентов. Но что это реально значит для бизнеса?</h2>
-            
-            <div class="problem-cards">
-                <div class="glass-card stagger-left">
-                    <div class="card-glow"></div>
-                    <div class="card-icon">📈</div>
-                    <h3>Хайп зашкаливает</h3>
-                    <p>Каждый день новый AI-инструмент. Непонятно, что реально работает, а что просто красивая демка.</p>
+            <div class="section-with-image">
+                <div>
+                    <h2 class="section-title slide-up">Я знаю, ты слышал про нас. Но давай честно...</h2>
+                    
+                    <div class="problem-cards">
+                        <div class="glass-card stagger-left">
+                            <div class="card-glow"></div>
+                            <div class="card-icon">📢</div>
+                            <h3>Хайп — это громко</h3>
+                            <p>Каждый день новый инструмент, новая обещалка. Я сам путаюсь в конкурентах. Понимаю, почему ты скептичен.</p>
+                        </div>
+                        
+                        <div class="glass-card scale-in">
+                            <div class="card-glow"></div>
+                            <div class="card-icon">🤷</div>
+                            <h3>Слов много, ясности мало</h3>
+                            <p>Агенты, ассистенты, copilot, автоматизация... Звучит как одно и то же? Не совсем. И это стоит разобрать.</p>
+                        </div>
+                        
+                        <div class="glass-card stagger-right">
+                            <div class="card-glow"></div>
+                            <div class="card-icon">🤔</div>
+                            <h3>А вдруг это не для меня?</h3>
+                            <p>Нормальный вопрос. Не всем нужен агент. Но понять, нужен ли — точно стоит.</p>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="glass-card scale-in">
-                    <div class="card-glow"></div>
-                    <div class="card-icon">🤔</div>
-                    <h3>Непонятно, с чего начать</h3>
-                    <p>Агенты, ассистенты, автоматизация — терминов много, а ясности ноль. Хочется простого объяснения.</p>
-                </div>
-                
-                <div class="glass-card stagger-right">
-                    <div class="card-glow"></div>
-                    <div class="card-icon">⏰</div>
-                    <h3>Страшно отстать</h3>
-                    <p>Конкуренты уже внедряют. А вы даже не уверены, нужно ли это вашему бизнесу.</p>
-                </div>
+                <img src="images/ai-brain.jpg" alt="Цифровой мозг AI-агента" class="section-image float-in">
             </div>
         </div>
     </section>
@@ -855,27 +977,36 @@
     <!-- What We'll Cover - Bento Grid -->
     <section class="section">
         <div class="container">
-            <h2 class="section-title slide-up">Что будет на встрече</h2>
+            <h2 class="section-title slide-up">Что покажет Алексей</h2>
             
             <div class="bento-grid">
                 <div class="bento-item bento-large scale-in">
-                    <h3>Что такое AI-агенты простым языком</h3>
-                    <p>Без технических деталей. Объясним так, чтобы было понятно после первого раза.</p>
+                    <img src="images/dashboard-future.jpg" alt="Голографический дашборд будущего" class="bento-background">
+                    <div class="bento-content">
+                        <h3>Что мы такое — простым языком</h3>
+                        <p>Не техническая лекция, а объяснение для человека, который ни разу не настраивал ничего сложнее будильника.</p>
+                    </div>
                 </div>
                 
                 <div class="bento-item bento-medium scale-in">
-                    <h3>Где агенты уже приносят пользу</h3>
-                    <p>Реальные сценарии: продажи, операционка, маркетинг, клиентский сервис.</p>
+                    <div class="bento-content">
+                        <h3>Где мы реально полезны</h3>
+                        <p>Продажи, операционка, маркетинг. Конкретные сценарии, не фантазии.</p>
+                    </div>
                 </div>
                 
                 <div class="bento-item bento-medium scale-in">
-                    <h3>Живая демонстрация</h3>
-                    <p>Покажем, как агент работает на практике. Не слайды — а рабочий пример.</p>
+                    <div class="bento-content">
+                        <h3>Живая демонстрация</h3>
+                        <p>Алексей покажет, как я работаю. В реальном времени. Без подготовленных слайдов.</p>
+                    </div>
                 </div>
                 
                 <div class="bento-item bento-small scale-in">
-                    <h3>Как начать новичку</h3>
-                    <p>Конкретный план первых шагов. Без "сначала выучите Python".</p>
+                    <div class="bento-content">
+                        <h3>Как начать с нуля</h3>
+                        <p>Чёткий план для тех, кто хочет попробовать, но не знает с чего.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -887,19 +1018,19 @@
             <div class="audience-content">
                 <div class="audience-blocks">
                     <div class="audience-checklist slide-up">
-                        <h3>Подойдёт, если:</h3>
+                        <h3>Тебе сюда, если:</h3>
                         <ul class="checklist">
-                            <li>У вас бизнес или управленческая роль</li>
-                            <li>Слышали про агентов, но не пробовали</li>
-                            <li>Хотите понять, стоит ли вообще в это вкладываться</li>
-                            <li>Устали от хайпа и хотите ясности</li>
+                            <li>У тебя бизнес или управленческая роль</li>
+                            <li>Слышал про агентов, но не пробовал</li>
+                            <li>Хочешь понять: это вообще стоит внимания?</li>
+                            <li>Устал от хайпа и хочешь ясности</li>
                         </ul>
+                        <img src="images/agents-working.jpg" alt="AI-агенты работают вместе" class="audience-image">
                     </div>
                     
                     <div class="quote-block slide-up">
-                        <h3>Главная мысль:</h3>
                         <div class="quote-text">
-                            "Агенты — это не замена людей. Это способ убрать рутину и дать команде заниматься тем, что реально важно."
+                            Я не замена людям. Я — способ убрать рутину и дать команде заниматься тем, что реально важно. Но не верь мне на слово — приходи посмотреть.
                         </div>
                     </div>
                 </div>
@@ -911,6 +1042,9 @@
     <section class="section">
         <div class="container">
             <div class="final-cta slide-up">
+                <img src="images/agent-hero.jpg" alt="AI-агент герой" class="cta-hero-image">
+                
+                <h2 class="cta-title">Увидимся завтра?</h2>
                 <div class="event-date">Пятница · 27 марта · 11:00 МСК</div>
                 
                 <div class="cta-buttons">
@@ -923,6 +1057,8 @@
                     <div class="qr-code" id="qr-code"></div>
                     <div class="qr-label">https://e2-e5.github.io/ai-agents-masterclass/</div>
                 </div>
+                
+                <p class="cta-note">Я буду демонстрировать. Алексей будет объяснять. Должно быть интересно.</p>
             </div>
         </div>
     </section>
@@ -991,7 +1127,7 @@
         // Calendar functions
         function addToGoogleCalendar() {
             const title = encodeURIComponent('AI-агенты для бизнеса — AI First');
-            const details = encodeURIComponent('Онлайн-встреча для предпринимателей про AI-агентов. Объясним простым языком — без кода и техно-жаргона. Ссылка на эфир: #');
+            const details = encodeURIComponent('Привет! Я — AI-агент. Завтра Алексей покажет, как я работаю. Вживую. Онлайн-встреча для предпринимателей. Ссылка на эфир: #');
             const startTime = '20260327T080000Z'; // 11:00 MSK = 08:00 UTC
             const endTime = '20260327T090000Z';   // 12:00 MSK = 09:00 UTC
             
@@ -1010,7 +1146,7 @@ DTSTAMP:20260326T133800Z
 DTSTART:20260327T080000Z
 DTEND:20260327T090000Z
 SUMMARY:AI-агенты для бизнеса — AI First
-DESCRIPTION:Онлайн-встреча для предпринимателей про AI-агентов. Объясним простым языком — без кода и техно-жаргона. Ссылка на эфир: #
+DESCRIPTION:Привет! Я — AI-агент. Завтра Алексей покажет, как я работаю. Вживую. Онлайн-встреча для предпринимателей. Ссылка на эфир: #
 LOCATION:Онлайн
 END:VEVENT
 END:VCALENDAR`;
@@ -1024,7 +1160,7 @@ END:VCALENDAR`;
             document.body.removeChild(link);
         }
 
-        // Intersection Observer for animations
+        // Enhanced animation system
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -1035,16 +1171,36 @@ END:VCALENDAR`;
                 if (entry.isIntersecting) {
                     setTimeout(() => {
                         entry.target.classList.add('visible');
-                    }, index * 100); // Stagger effect
+                    }, index * 150); // Enhanced stagger effect
                 }
             });
         }, observerOptions);
 
+        // Special observer for images
+        const imageObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Add subtle hover effect after load
+                    entry.target.addEventListener('mouseover', () => {
+                        entry.target.style.transform = 'scale(1.02) rotate(1deg)';
+                    });
+                    entry.target.addEventListener('mouseout', () => {
+                        entry.target.style.transform = 'scale(1)';
+                    });
+                }
+            });
+        }, { threshold: 0.3 });
+
         // Initialize animations and QR code
         document.addEventListener('DOMContentLoaded', () => {
             // Observe animated elements
-            const animatedElements = document.querySelectorAll('.clip-reveal, .slide-up, .stagger-left, .stagger-right, .scale-in');
+            const animatedElements = document.querySelectorAll('.clip-reveal, .slide-up, .stagger-left, .stagger-right, .scale-in, .float-in');
             animatedElements.forEach(el => observer.observe(el));
+            
+            // Observe images
+            const images = document.querySelectorAll('.feature-image, .section-image, .audience-image');
+            images.forEach(img => imageObserver.observe(img));
             
             // Generate QR code
             generateQRCode('https://e2-e5.github.io/ai-agents-masterclass/');
@@ -1058,6 +1214,30 @@ END:VCALENDAR`;
                 document.querySelectorAll('.slide-up').forEach(el => el.classList.add('visible'));
             }, 800);
         });
+
+        // Enhanced scroll performance
+        let ticking = false;
+        function updateScroll() {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.5;
+            
+            // Parallax effect for background grid
+            const grid = document.querySelector('.hero-bg-grid');
+            if (grid) {
+                grid.style.transform = `translateY(${rate}px)`;
+            }
+            
+            ticking = false;
+        }
+
+        function requestTick() {
+            if (!ticking) {
+                requestAnimationFrame(updateScroll);
+                ticking = true;
+            }
+        }
+
+        window.addEventListener('scroll', requestTick);
     </script>
 </body>
 </html>
