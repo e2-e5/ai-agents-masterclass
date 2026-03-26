@@ -321,21 +321,22 @@
         }
 
         .hero h1 {
-            font-size: clamp(48px, 8vw, 96px);
+            font-size: clamp(36px, 8vw, 96px);
             font-weight: 800;
             margin-bottom: 24px;
-            line-height: 0.95;
+            line-height: 1.05;
             letter-spacing: -0.02em;
         }
 
         .hero-title-main {
             display: block;
             margin-bottom: 16px;
+            white-space: nowrap;
         }
 
         .hero-title-sub {
             display: block;
-            font-size: clamp(32px, 6vw, 64px);
+            font-size: clamp(24px, 6vw, 64px);
             font-weight: 600;
             letter-spacing: -0.01em;
         }
@@ -827,15 +828,40 @@
 
         @media (max-width: 768px) {
             .hero {
-                padding: 80px 0 100px;
+                padding: 60px 0 80px;
+            }
+
+            .hero h1 {
+                font-size: clamp(28px, 9vw, 48px);
+            }
+
+            .hero-title-main {
+                white-space: normal;
+            }
+
+            .hero-title-sub {
+                font-size: clamp(20px, 7vw, 36px);
+            }
+
+            .hero p {
+                font-size: 17px;
+                padding: 0 8px;
             }
             
             .section {
-                padding: 80px 0;
+                padding: 60px 0;
+            }
+
+            .section-title {
+                font-size: clamp(24px, 6vw, 36px);
+                margin-bottom: 40px;
+                padding: 0 8px;
             }
             
             .problem-cards {
                 grid-template-columns: 1fr;
+                gap: 16px;
+                margin-top: 40px;
             }
             
             .bento-grid {
@@ -846,41 +872,94 @@
             .bento-item {
                 grid-column: span 1 !important;
                 grid-row: span 1 !important;
-                min-height: 120px;
+                min-height: 100px;
+            }
+
+            .bento-item h3 {
+                font-size: 18px;
+            }
+
+            .bento-item p {
+                font-size: 14px;
             }
             
             .audience-blocks {
                 grid-template-columns: 1fr;
-                gap: 24px;
+                gap: 20px;
             }
             
             .cta-buttons {
                 flex-direction: column;
-                align-items: center;
+                align-items: stretch;
+                gap: 12px;
             }
             
             .btn {
                 width: 100%;
-                max-width: 300px;
+                white-space: normal;
+                text-align: center;
+                justify-content: center;
+                padding: 14px 20px;
+                font-size: 15px;
             }
             
             .final-cta {
-                padding: 48px 32px;
+                padding: 40px 24px;
+            }
+
+            .cta-title {
+                font-size: 26px;
+            }
+
+            .event-date {
+                font-size: 16px;
+            }
+
+            .cta-note {
+                font-size: 15px;
             }
             
             .meta-pills {
-                flex-direction: column;
-                gap: 16px;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 12px;
+            }
+
+            .meta-pill {
+                font-size: 13px;
+                padding: 8px 14px;
             }
 
             .hero-image {
-                width: 150px;
-                height: 150px;
+                width: 140px;
+                height: 140px;
             }
 
             .section-image {
-                width: 250px;
-                height: 250px;
+                width: 200px;
+                height: 200px;
+            }
+
+            .glass-card h3 {
+                font-size: 18px;
+            }
+
+            .glass-card p {
+                font-size: 15px;
+            }
+
+            .quote-text {
+                font-size: 16px;
+            }
+
+            .eyebrow {
+                font-size: 12px;
+            }
+
+            .qr-label {
+                font-size: 12px;
+                word-break: break-all;
             }
         }
 
@@ -888,13 +967,34 @@
             .container {
                 padding: 0 16px;
             }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .hero-title-sub {
+                font-size: 20px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
             
             .glass-card, .audience-checklist, .quote-block {
-                padding: 24px;
+                padding: 20px;
             }
             
             .final-cta {
-                padding: 32px 20px;
+                padding: 32px 16px;
+            }
+
+            .cta-hero-image {
+                width: 90px;
+                height: 90px;
+            }
+
+            .section-title {
+                font-size: 22px;
             }
         }
     </style>
